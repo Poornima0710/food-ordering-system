@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lavenderblush;
+            padding: 20px;
+        }
+        .order-details {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .order-details h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .order-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .order-item img {
+            max-width: 80px;
+            margin-right: 20px;
+        }
+        .order-item .details {
+            flex: 1;
+        }
+        .order-item .name {
+            font-size: 1.2em;
+        }
+        .order-item .cost {
+            color: #555;
+            margin-top: 4px;
+        }
+        .total-cost {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 1.2em;
+        }
+        .center-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+       .center-button button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .center-button button:hover {
+            background-color: #0056b3;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">My Order</h1>
+    <div class="order-details">
+        <h2>Order Summary</h2>
+        <!-- Order Items will be dynamically added here -->
+    </div>
+
+    <div class="total-cost">
+        Total Cost: $<span id="totalCostValue">0</span>
+    </div>
+
+    <div class="center-button">
+        <a href="place order.html"><button>Next</button></a>
+    </div>
+
+    <script>
+        // Function to load order details
+        function loadOrderDetails() {
+            const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
+            const totalCost = parseFloat(localStorage.getItem('totalCost')) || 0;
+            const totalCostElement = document.getElementById('totalCostValue');
+
+            let orderItemsHtml = '';
+
+            if (orderDetails && orderDetails.length > 0) {
+                orderDetails.forEach(item => {
+                    orderItemsHtml += `
+                        <div class="order-item">
+                            <img src="${item.image}" alt="${item.name}">
+                            <div class="details">
+                                <div class="name">${item.name}</div>
+                                <div class="cost">$${item.cost}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                orderItemsHtml = '<p>No items in the order.</p>';
+            }
+
+            document.querySelector('.order-details').insertAdjacentHTML('beforeend', orderItemsHtml);
+            totalCostElement.textContent = totalCost.toFixed(2);
+        }
+
+        // Load order details and total cost when the page loads
+        window.onload = function() {
+            loadOrderDetails();
+        };
+    </script>
+</body>
+</html>

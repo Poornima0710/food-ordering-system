@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Product List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: pink;
+            padding: 20px;
+        }
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .product {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+        }
+        .product img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 16px;
+            transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+.product:hover img {
+    transform: scale(1.2); /* Zoom in the image when hovered */
+}
+        .product .name {
+            font-size: 1.2em;
+            margin-top: 8px;
+        }
+        .product .cost {
+            color: #555;
+            margin-top: 4px;
+        }
+        .product .add-to-cart-button, .product .remove-from-cart-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .product .add-to-cart-button:hover, .product .remove-from-cart-button:hover {
+            background-color: #0056b3;
+        }
+        .product .remove-from-cart-button {
+            background-color: #f44336;
+            display: none;
+        }
+
+        /* Center Button Style */
+        .center-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.center-button button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.center-button button:hover {
+    background-color: #0056b3;
+}
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">View Product List</h1>
+    <div class="product-list">
+        <!-- Food Products -->
+        <div class="product">
+            <img src="img/Masal vadai.jpeg" alt="Masal vadai">
+            <div class="name">Masal vadai</div>
+            <div class="cost">$110</div>
+            <button class="add-to-cart-button" onclick="addToCart('Masal vadai', 110, 'img/Masal vadai.jpeg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('Masal vadai', 110)">Remove from Cart</button>
+        </div>
+        <div class="product">
+            <img src="img/Parotta.jpeg" alt="Parotta">
+            <div class="name">Parotta</div>
+            <div class="cost">$220</div>
+            <button class="add-to-cart-button" onclick="addToCart('Parotta', 220, 'img/Parotta.jpeg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('Parotta', 220)">Remove from Cart</button>
+        </div>
+        <div class="product">
+            <img src="img/Chicken briyani.jpeg" alt="Chicken briyani">
+            <div class="name">Chicken briyani</div>
+            <div class="cost">$530</div>
+            <button class="add-to-cart-button" onclick="addToCart('Chicken briyani', 530, 'img/Chicken briyani.jpeg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('Chicken briyani', 530)">Remove from Cart</button>
+        </div>
+        <!-- Add other food products similarly -->
+
+        <!-- Fresh Juices -->
+        <div class="product">
+            <img src="img/Orange juice.jpeg" alt="Orange juice">
+            <div class="name">Orange juice</div>
+            <div class="cost">$120</div>
+            <button class="add-to-cart-button" onclick="addToCart('Orange juice', 120, 'img/Orange juice.jpeg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('Orange juice', 120)">Remove from Cart</button>
+        </div>
+        <div class="product">
+            <img src="img/Beetroot juice.jpeg" alt="Beetroot juice">
+            <div class="name">Beetroot juice</div>
+            <div class="cost">$112</div>
+            <button class="add-to-cart-button" onclick="addToCart('Beetroot juice', 112, 'img/Beetroot juice.jpeg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('Beetroot juice', 112)">Remove from Cart</button>
+        </div>
+        <div class="product">
+            <img src="img/Pineapple juice.jpeg" alt="Pineapple juice">
+            <div class="name">Pineapple juice</div>
+            <div class="cost">$150</div>
+            <button class="add-to-cart-button" onclick="addToCart('Pineapple juice', 150, 'img/Pineapple juice.jpeg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('Pineapple juice', 150)">Remove from Cart</button>
+        </div>
+        <div class="product">
+            <img src="img/Strawberry juice.jpeg" alt="Strawberry juice">
+            <div class="name">Strawberry juice</div>
+            <div class="cost">$220</div>
+            <button class="add-to-cart-button" onclick="addToCart('Strawberry juice', 220, 'img/Strawberry juice.jpeg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('Strawberry juice', 220)">Remove from Cart</button>
+        </div>
+        <div class="product">
+            <img src="img/Lemon soda.jpeg " alt="Lemon soda">
+            <div class="name">Lemon soda</div>
+            <div class="cost">$123</div>
+            <button class="add-to-cart-button" onclick="addToCart('Lemon soda', 123, 'img/Lemon soda.jpeg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('Lemon soda', 123)">Remove from Cart</button>
+        </div>
+        <div class="product">
+            <img src="img/Green juice.jpeg" alt="Green juice">
+            <div class="name">Green juice</div>
+            <div class="cost">$156</div>
+            <button class="add-to-cart-button" onclick="addToCart('Green juice', 156, 'img/Green juice.jpeg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('Green juice', 156)">Remove from Cart</button>
+        </div>
+        <div class="product">
+            <img src="img/Dragon juice.jpeg" alt="Dragon juice">
+            <div class="name">Dragon juice</div>
+            <div class="cost">$236</div>
+            <button class="add-to-cart-button" onclick="addToCart('Dragon juice', 236, 'img/Dragon juice.jpeg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('Dragon juice', 236)">Remove from Cart</button>
+        </div>
+        <div class="product">
+            <img src="img/Carrot juice.jpeg" alt="Carrot juice">
+            <div class="name">Carrot juice</div>
+            <div class="cost">$221</div>
+            <button class="add-to-cart-button" onclick="addToCart('Carrot juice', 221, 'img/Carrot juice.jpeg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('Carrot juice', 221)">Remove from Cart</button>
+        </div>
+        <div class="product">
+            <img src="img/chicken burger.jpg" alt="Chicken burger">
+            <div class="name">Chicken burger</div>
+            <div class="cost">$521</div>
+            <button class="add-to-cart-button" onclick="addToCart('Chicken burger', 521, 'img/chicken burger.jpg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('Chicken burger', 521)">Remove from Cart</button>
+        </div>
+        <div class="product">
+            <img src="img/french fries.jpg" alt="French fries">
+            <div class="name">French fries</div>
+            <div class="cost">$120</div>
+            <button class="add-to-cart-button" onclick="addToCart('French fries', 120, 'img/french fries.jpg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('French fries', 120)">Remove from Cart</button>
+        </div>
+        <div class="product">
+            <img src="img/Moms.jpg" alt="Moms">
+            <div class="name">Moms</div>
+            <div class="cost">$220</div>
+            <button class="add-to-cart-button" onclick="addToCart('Moms', 220, 'img/Moms.jpg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('Moms', 220)">Remove from Cart</button>
+        </div>
+        <div class="product">
+            <img src="img/pizza.jpg" alt="Pizza">
+            <div class="name">Pizza</div>
+            <div class="cost">$500</div>
+            <button class="add-to-cart-button" onclick="addToCart('Pizza', 500, 'img/pizza.jpg')">Add to Cart</button>
+            <button class="remove-from-cart-button" onclick="removeFromCart('Pizza', 500)">Remove from Cart</button>
+        </div>
+        <!-- Centered Next Button -->
+        <div class="center-button">
+            <a href="my order.html"><button>Next</button></a>
+        </div>
+    </div>
+
+    <!-- JavaScript for cart functionality -->
+    <script>
+        // Clear cart and total cost on page load
+        window.onload = function() {
+            localStorage.removeItem('orderDetails');
+            localStorage.removeItem('totalCost');
+        };
+
+        function addToCart(productName, productCost, productImage) {
+            let orderDetails = JSON.parse(localStorage.getItem('orderDetails')) || [];
+            orderDetails.push({ name: productName, cost: productCost, image: productImage });
+            localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
+
+            let totalCost = parseFloat(localStorage.getItem('totalCost')) || 0;
+            totalCost += productCost;
+            localStorage.setItem('totalCost', totalCost.toFixed(2));
+
+            showNotification('${productName} added to cart!');
+            updateTotalCostUI();
+            
+
+            // Show remove button for the added product
+            const productElements = document.querySelectorAll('.product');
+            productElements.forEach(product => {
+                if (product.querySelector('.name').textContent === productName) {
+                    product.querySelector('.remove-from-cart-button').style.display = 'block';
+                }
+            });
+        }
+
+        function removeFromCart(productName, productCost) {
+            let orderDetails = JSON.parse(localStorage.getItem('orderDetails')) || [];
+            orderDetails = orderDetails.filter(item => item.name !== productName);
+            localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
+
+            let totalCost = parseFloat(localStorage.getItem('totalCost')) || 0;
+            totalCost -= productCost;
+            localStorage.setItem('totalCost', totalCost.toFixed(2));
+
+            showNotification('${productName} removed from cart!');
+            updateTotalCostUI();
+
+            // Hide remove button for the removed product
+            const productElements = document.querySelectorAll('.product');
+            productElements.forEach(product => {
+                if (product.querySelector('.name').textContent === productName) {
+                    product.querySelector('.remove-from-cart-button').style.display = 'none';
+                }
+            });
+        }
+
+        function showNotification(message) {
+            alert(message);
+        }
+
+        function updateTotalCostUI() {
+            // Assuming you have an element with id 'totalCostValue' to display the total cost
+            const totalCostElement = document.getElementById('totalCostValue');
+            if (totalCostElement) {
+                let totalCost = parseFloat(localStorage.getItem('totalCost')) || 0;
+                totalCostElement.textContent = totalCost.toFixed(2);
+            }
+        }
+        
+    </script>
+</body>
+</html>

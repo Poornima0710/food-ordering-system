@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('img/catering.jpeg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            color: black; /* Adjust text color for better visibility */
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .welcome-message {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .user-profile {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+        }
+        .navigation-link {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .navigation-link:hover {
+            background-color: #0056b3;
+        }
+        .logout-button {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .logout-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Our Website!</h1>
+        <p class="welcome-message">You are now registered and logged in.</p>
+        
+        <!-- Example user profile section -->
+        <div class="user-profile">
+            <h2>My Profile</h2>
+            <p>Name: <span id="fullName"></span></p>
+            <p>Email: <span id="email"></span></p>
+            <!-- Add more profile information as needed -->
+        </div>
+        
+        <a href="user view product.html" class="navigation-link">Go to Product Page</a>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstName = localStorage.getItem('firstName');
+            const lastName = localStorage.getItem('lastName');
+            const email = localStorage.getItem('email');
+
+            document.getElementById('fullName').textContent = `${firstName} ${lastName}`;
+            document.getElementById('email').textContent = email;
+        });
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'user register.html';
+        }
+    </script>
+</body>
+</html>

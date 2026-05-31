@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Light gray background */
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+        }
+
+        .content-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px; /* Adjust width as needed */
+            max-width: 90%; /* Responsive max-width */
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-box">
+        <h1>Add Product</h1>
+        <form id="addProductForm">
+            <label for="productName">Product Name:</label>
+            <input type="text" id="productName" name="productName" required><br><br>
+            
+            <label for="productCost">Product Cost:</label>
+            <input type="number" id="productCost" name="productCost" min="0" step="0.01" required><br><br>
+            
+            <label for="productImage">Product Image URL:</label>
+            <input type="url" id="productImage" name="productImage" required><br><br>
+            
+            <button type="submit">Add Product</button>
+            <button type="button" onclick="redirectToViewProducts()">Next</button>
+        </form>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js"></script>
+
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        const addProductForm = document.getElementById('addProductForm');
+
+        addProductForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const productName = addProductForm.productName.value.trim();
+            const productCost = parseFloat(addProductForm.productCost.value);
+            const productImage = addProductForm.productImage.value.trim();
+
+            if (!isNaN(productCost) && productName && productImage) {
+                try {
+                    // Add product to Firestore collection
+                    const docRef = await db.collection("products").add({
+                        name: productName,
+                        cost: productCost,
+                        image: productImage
+                    });
+
+                    console.log("Product added with ID: ", docRef.id);
+                    
+                    // Show confirmation message
+                    alert("Product added successfully!");
+
+                    // Reset form
+                    addProductForm.reset();
+                } catch (error) {
+                    console.error("Error adding product: ", error);
+                    alert("Error adding product!");
+                }
+            } else {
+                alert("Please fill in all fields correctly.");
+            }
+        });
+
+        function redirectToViewProducts() {
+            window.location.href = "admin view order.html";
+        }
+    </script>
+</body>
+</html>

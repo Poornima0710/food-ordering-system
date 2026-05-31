@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            background-image: url(img/bgadmin.jpeg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .profile-info {
+            margin-bottom: 10px;
+        }
+        .logout {
+            margin-top: 20px;
+        }
+        .logout a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .logout a:hover {
+            text-decoration: underline;
+        }
+        .navigation-link {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .navigation-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, Admin!</h1>
+        <div class="profile-info" id="profileInfo">
+            <!-- Admin profile information will be displayed here -->
+        </div>
+        <div>
+            <a href="upload product.html" class="navigation-link">Upload Product</a>
+        </div>
+        <div class="logout">
+            <a href="#" id="logout">Logout</a>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve admin data from localStorage
+        const adminData = JSON.parse(localStorage.getItem('adminData'));
+
+        // Display admin information on the page
+        if (adminData) {
+            const profileInfo = document.getElementById('profileInfo');
+            profileInfo.innerHTML = `
+                <p>Username: ${adminData.username}</p>
+                <p>Email: ${adminData.email}</p>
+            `;
+        } else {
+            // Redirect to admin login page if no admin data found
+            window.location.href = 'admin login.html';
+        }
+
+        // Logout functionality
+        document.getElementById('logout').addEventListener('click', function(event) {
+            event.preventDefault();
+            localStorage.removeItem('adminData');
+            window.location.href = 'admin register.html'; // Redirect to register page after logout
+        });
+    </script>
+</body>
+</html>
